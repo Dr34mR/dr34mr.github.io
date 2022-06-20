@@ -1,0 +1,376 @@
+/*
+body {
+  background-color: #03111C;
+}
+*/
+
+/*
+Teletrac Navman Colours:
+Background: 03111C
+Button Grey: 25324C
+Blue Button Background / Borders: 0E2E43
+Light Blue Text / Icon: 1E8ACB
+Fluro Green: 76BB32
+Orange: BB5501
+*/
+
+
+.btn-toolbar{
+	text-align: center;
+}
+
+/* PENALTY.MOBI INDEX SQUARE BUTTON APPEARANCE WITH ICON */
+.menubtnvert {
+  background-color: #0E2E43;
+  border: 5px solid white;
+  border-radius: 10px;
+  border-color: #4b781e;
+  color: #aeaeae; /* Font Colour */
+  padding: 12px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+/*   box-shadow: 0 0 2px black; */
+  vertical-align:middle;
+/*   margin:0;
+	  display: inline-flex; */
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 5px;
+  margin-right: 15px;
+
+  box-shadow: 0 0 0 10px #0E2F45;
+/*                 inset 0 0 0 2px #fff; */
+  
+  
+}
+
+/* Darker background on mouse-over */
+.menubtnvert:hover {
+  background-color: #0e3b56;
+  outline: 10px solid #0e3b56;
+  border-color: #76BB32; /* Border Colour */
+  color: #dbdbdb; /* Font Colour */
+}	
+
+#ButtonImg img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  padding: 5px;
+}	
+#ButtonImg:hover img {
+  filter: brightness(140%);
+
+}	
+
+
+
+.menubtnINFO {
+  background-color: #0E2E43;
+  border: 5px solid white;
+  border-radius: 10px;
+  border-color: #9c7503;
+  color: #aeaeae; /* Font Colour */
+  padding: 12px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 322px;
+  height: 150px;
+/*   box-shadow: 0 0 2px black; */
+  vertical-align:middle;
+/*   margin:0;
+	  display: inline-flex; */
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-left: 5px;
+  margin-right: 15px;
+
+  box-shadow: 0 0 0 10px #0E2F45;
+/*                 inset 0 0 0 2px #fff; */
+  
+  
+}
+
+/* Darker background on mouse-over */
+.menubtnINFO:hover {
+  background-color: #0e3b56;
+  outline: 10px solid #0e3b56;
+  border-color: #FAAF05; /* Border Colour */
+  color: #dbdbdb; /* Font Colour */
+}	
+
+
+
+
+
+/* TOP OF PAGE NAVIGATIONAL MENU BUTTON APPEARANCE */
+.menubtn {
+  background-color: #0E2F45;
+  border: none;
+  color: white;
+  padding: 12px 12px;
+  font-size: 16px;
+  cursor: pointer;
+/*   float: left; */
+   margin: 0;
+   box-shadow: 0 0 2px black;
+}
+/* Darker background on mouse-over */
+.menubtn:hover {
+   background-color: #27678E;
+}	
+
+
+
+
+
+
+/* GENERAL BUTTON APPEARANCE */
+.generalbtn {
+  background-color: #0E2F45;
+  border: none;
+  color: white;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin: 0;
+  box-shadow: 0 0 2px black;
+  -webkit-appearance: none; /* This line is required for Apple Devices else a border-radius is applied by apple to curve the corners of 'Form' buttons */
+  border-radius: 0;
+}
+/* Darker background on mouse-over */
+.generalbtn:hover {
+  background-color: #27678E;
+}
+
+
+ol{
+	margin-top:0;
+	margin-bottom: 0;
+	margin-block-start: 0;
+}
+
+ul{
+	margin-top:0;
+	margin-bottom: 0;
+	margin-block-start: 0;
+}
+
+
+
+
+h1 {
+  font-family:arial;
+}
+
+h2 {
+  font-family:arial;
+  font-style: italic;
+  text-decoration-line: underline;
+
+}
+h3{
+	font-family: arial;
+	margin-bottom:.10em;
+}
+
+
+p {
+	font-family: arial;
+	margin-top:.10em;
+}	
+
+p.noMargin {
+	font-family: arial;
+	margin-top:.10em;
+	margin-bottom:.10em;
+}		
+
+p.tabbed {
+	font-family: arial;
+	margin-top:.10em;
+	padding-left: 2em;	
+}	
+
+.point {
+	font-family: arial;
+	margin-top:.10em;
+	margin-block-end: 0;
+}		
+	
+	
+textarea {  
+   font-family: arial; 
+   font-size: 15px;   
+}
+
+CategoryHeading {
+  font-family:arial;
+  font-weight: bold	
+}
+	
+/* DEFAULT ACCORDION SETUP */
+.accordion { 
+  background-color: #3F51B5; /* DEFAULT ACCORDION COLOUR UNSELECTED */
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+/* DEFAULT ACCORDIAN STYLE */
+/* DEFAULT ACCORDION COLOUR WHEN SELECTED */
+.active, .accordion:hover {
+  background-color: #2D3D99;
+  color: white;
+}
+
+		
+		/* ACCORDION - RED */
+		.accordion.red { /* ACCORDION COLOUR UNSELECTED */
+			background-color:#CC0000;
+			color:white;
+		}
+		.accordion.red.active, .accordion.red:hover { /* ACCORDION COLOUR WHEN SELECTED */
+			background-color:#990000;
+			color:white;
+		}
+		/* -------- */
+		
+		/* ACCORDION - ORANGE */
+		.accordion.orange { /* ACCORDION COLOUR UNSELECTED */
+			background-color:orange;
+			color:black;
+		}
+		.accordion.orange.active, .accordion.orange:hover { /* ACCORDION COLOUR WHEN SELECTED */
+			background-color:#db9200;
+/* 			color:white; */
+		}
+		/* -------- */
+		
+		/* ACCORDION - PURPLE */
+		.accordion.purple { /* ACCORDION COLOUR UNSELECTED */
+			background-color:#6e0074;
+			color:white;
+		}
+		.accordion.purple.active, .accordion.purple:hover { /* ACCORDION COLOUR WHEN SELECTED */
+			background-color:#600065;
+			color:white;
+		}
+		/* -------- */
+		
+		/* ACCORDION - GREEN */
+		.accordion.green { /* ACCORDION COLOUR UNSELECTED */
+			background-color:green;
+			color:white;
+		}
+		.accordion.green.active, .accordion.green:hover { /* ACCORDION COLOUR WHEN SELECTED */
+			background-color:#005300;
+			color:white;
+		}
+		/* -------- */
+
+
+.accordion:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+/* Specific Colours for different accordians on Pages */
+#DiaryCharges .accordion { background-color:#CC0000;} /*Red*/
+#DiaryCharges .active, #DiaryCharges .accordion:hover { background-color:#990000;} /*Deep Red*/
+
+#DiaryCharges .accordion.purple{ background-color:#6e0074;} /*Purple*/
+#DiaryCharges .active.purple, #DiaryCharges .accordion.purple:hover { background-color:#600065;} /*Deep Purple*/
+
+#DiaryCharges .accordion.green{ background-color:green;} /*Green*/
+#DiaryCharges .active.green, #DiaryCharges .accordion.green:hover { background-color:#005300;} /*Deep Green*/
+
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px; 
+  background-color: transparent;
+   /* max-height: 0; */
+   display:none;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  font-family:arial;
+  font-size: 15px;
+}
+
+
+
+/* inputDataFields - This CSS is used for the text and input fields on Forms ie: Oral Fluid, TSS, Call Sign on pages, etc */
+.inputDataFields{
+	display:table; 
+	font-family: arial; 
+	font-weight: normal; 
+	font-size: 16px;
+	}
+	
+.inputDataFields-row{
+	display: table-row; 
+	}
+	
+.inputDataFields-row key{
+	display: table-cell; 
+	padding-right: 5px; 
+	vertical-align:middle;
+	}
+
+input[type="date"] { 
+	font-family: arial; 
+	font-weight: normal; 
+	font-size: 14px;
+}
+
+input[type="time"] { 
+	font-family: arial; 
+	font-weight: normal; 
+	font-size: 14px;
+}
+
+select{
+	font-family: arial; 
+	font-weight: normal; 
+	font-size: 14px;
+}
+
+
+
+
+/*
+     FILE ARCHIVED ON 07:15:35 Sep 17, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 05:16:09 Jun 09, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.518
+  exclusion.robots: 0.019
+  exclusion.robots.policy: 0.009
+  esindex: 0.011
+  cdx.remote: 19.473
+  LoadShardBlock: 57.341 (3)
+  PetaboxLoader3.datanode: 56.986 (4)
+  load_resource: 240.403
+  PetaboxLoader3.resolve: 190.536
+*/

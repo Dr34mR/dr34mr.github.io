@@ -1,0 +1,59 @@
+var _____WB$wombat$assign$function_____ = function(name) {return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name)) || self[name]; };
+if (!self.__WB_pmw) { self.__WB_pmw = function(obj) { this.__WB_source = obj; return this; } }
+{
+  let window = _____WB$wombat$assign$function_____("window");
+  let self = _____WB$wombat$assign$function_____("self");
+  let document = _____WB$wombat$assign$function_____("document");
+  let location = _____WB$wombat$assign$function_____("location");
+  let top = _____WB$wombat$assign$function_____("top");
+  let parent = _____WB$wombat$assign$function_____("parent");
+  let frames = _____WB$wombat$assign$function_____("frames");
+  let opener = _____WB$wombat$assign$function_____("opener");
+
+//Following Javascript will convert a date input to a valueAsDate where it is then expanded to full text IE: "Monday 1st January 2022". The resetDateVariables function provides a method to clear the global variables else the data exists when generating narratives. 25/09/2022
+
+
+function dateString(dateInputID){
+	const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+	const dayDate = ["1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th","13th","14th","15th","16th","17th","18th","19th","20th","21st","22nd","23rd","24th","25th","26th","27th","28th","29th","30th","31st"];
+	const month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+	
+	// const date = new Date(); //Get the users current date
+	const date = dateInputID.valueAsDate //Getthe date from the date picker and convert it from yyyy-mm-dd to the date format
+	
+	 let = weekdayString = weekday[date.getDay()];
+	 let = dayDateString = dayDate[date.getDate()-1]; //.getDate() returns a range of 1-31. Subtract 1 due to constant beginning at 0.
+	 let = monthString = month[date.getMonth()];
+	 let = yearString = date.getFullYear();
+	 return([weekdayString,dayDateString,monthString,yearString])
+
+}
+
+function resetDateVariables(){
+	weekdayString = ""
+	dayDateString = ""	
+	monthString = ""
+	yearString = ""
+}
+
+}
+/*
+     FILE ARCHIVED ON 07:17:44 Sep 17, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 05:16:10 Jun 09, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.439
+  exclusion.robots: 0.017
+  exclusion.robots.policy: 0.009
+  esindex: 0.009
+  cdx.remote: 140.706
+  LoadShardBlock: 67.513 (3)
+  PetaboxLoader3.datanode: 83.586 (4)
+  load_resource: 100.143
+  PetaboxLoader3.resolve: 57.402
+*/

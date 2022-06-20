@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+<head>
+<style>
+p {font-family: arial;}
+
+.tableStatementDetailsDataEntry {
+		font-family: arial;
+		background-color: rgba(204, 230, 255, 0.30);
+		border-radius: 5px;
+		padding: 5px 5px;	
+}
+
+.tableFooterDataEntry {
+		font-family: arial;
+		background-color: rgba(204, 230, 255, 0.30);
+		border-radius: 5px;
+		padding: 5px 5px;	
+}
+
+.tableStatementText {display: none} /* Hides the table containing the break down of the statement */
+
+.inputStatementText {white-space: pre-wrap;} /* Cannot get this to work */
+
+.tableSignatureDataEntry {
+		font-family: arial;
+		background-color: rgba(204, 230, 255, 0.30);
+		border-radius: 5px;
+		padding: 5px 5px;	
+}
+
+.tableFooterButtons{
+		font-family: arial;
+		background-color: rgba(138, 47, 47, 0.11);
+		border-radius: 5px;
+		padding: 5px 5px;		
+}
+#protectedContent {
+      display: none;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+#error {
+  color: red;
+}
+</style>	
+	
+<!--
+	ISSUES:
+	 - Cant get textarea to prewrap
+	 - " within I said - adding a hex or HTML to the insert button code
+	 - Bold some specific text
+	 - combine css for the 'said:' detection where we'll later bold just this up to the :
+	 - Figure out how to make localStorage specific to page. May have to change all ID's with identification of the page we're on.
+-->
+
+	
+	<title>NSW Witness Statement</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<link rel="stylesheet" href="./Statement_files/font-awesome.min.css">
+	<link rel="stylesheet" href="./Statement_files/style.css">
+	<link rel="stylesheet" href="./Statement_files/digitalSignatureCanvas.css">
+
+</head>
+<body onload="viewDidLoad();">
+
+<h2>Enter Password to View Content</h2>
+<input type="password" id="passwordInput" placeholder="">
+<button onclick="checkPassword()">Submit</button>
+<div id="error"></div>
+
+<div id="protectedContent">
+ 
+<button class="menubtn" ;="" onclick="location.href=&#39;/index.html&#39;"><i class="fa fa-home"></i> Home</button>
+<button class="menubtn" ;="" onclick="location.href=&#39;/Statement/NSW_Police_Statement.html&#39;"><i class="fa fa-pencil"></i> Police Statement Generator</button>
+
+<!--- MAIN HEADING --->
+<h1>NSW Witness Statement</h1>
+
+
+<!-- TOP STATEMENT DETAILS DATA ENTRY -->
+<p>
+</p><div class="tableStatementDetailsDataEntry">
+  <table class="table" id="FooterDataEntry">
+    <tbody>
+      <tr id="detailsMatterOf">
+        <td class="statementDetailsTitle"><b>In the matter of: </b></td>
+        <td class="statementDetailsInput"><input type="text" id="inputMatterOf" maxlength="60" size="30" placeholder="Police - VS - "></td>
+      </tr>
+      
+      <tr id="detailsPlace">
+        <td class="statementDetailsTitle"><b>Place:</b></td>
+        <td class="statementDetailsInput"><input type="text" id="inputPlace" maxlength="60" size="30" placeholder=""></td>
+      </tr>
+      
+      <tr id="detailsDate">
+        <td class="statementDetailsTitle"><b>Date:</b></td>
+        <td class="statementDetailsInput"><input type="date" id="inputWitnessStatementDate" maxlength="30" size="30" placeholder="1st January 2022"></td>
+      </tr>
+      
+      <tr id="detailsName">
+        <td class="statementDetailsName"><b>Name:</b></td>
+        <td class="statementDetailsName"><input type="text" id="inputCreatorName" maxlength="35" size="30" placeholder=""></td>
+      </tr>
+      
+      <tr id="detailsAge">
+        <td class="statementDetailsAge"><b>Age:</b></td>
+        <td class="statementDetailsAge"><input type="number" inputmode="numeric" pattern="\d*" id="inputAge" size="30" min="0" placeholder=""></td>
+      </tr>
+      
+    </tbody>
+  </table>
+</div>
+<p></p>
+
+<p>
+	</p><div class="tableStatementDetailsDataEntry">	 
+			<b>STATEMENT TEMPLETS:</b><br>
+			<button class="generalbtn" onclick="insertJurat()">Jurat</button>
+			<button class="generalbtn" onclick="insertCCTVStatement()">CCTV</button>	
+			<button class="generalbtn" onclick="iSaid()">I said: "</button>	
+			<button class="generalbtn" onclick="heSaid()">He said: "</button>
+			<button class="generalbtn" onclick="sheSaid()">She said: "</button>
+			<button class="generalbtn" onclick="said()"> said: "</button>
+<p></p>
+
+
+<p>	
+		<b>STATES: </b><br>
+		<textarea id="inputStatementText" rows="15" value="" style="width: 99%;">This statement made by me accurately sets out the evidence that I would be prepared, if necessary, to give in court as a witness. The statement is true to the best of my knowledge and belief and I make it knowing that, if it is tendered in evidence, I will be liable to prosecution if I have wilfully stated in it anything that I know to be false, or do not believe to be true.I am __ years of age.
+
+I have not used Generative Artificial Intelligence (Gen AI) in the creation of this statement or any attached exhibits.
+</textarea>
+	</p></div>
+<p></p>
+
+
+
+
+
+
+
+<!-- FOOTER DATA ENTRY - WITNESS & CREATER INPUTS -->
+<p>
+
+	</p><div class="tableSignatureDataEntry" style="min-width:410px;">
+	  <table class="table" id="SignatureDataEntry">
+	    <tbody>	
+	      <tr> 
+		      <td colspan="2"><b>STATEMENT MAKER SIGNATURE:</b></td>		      
+	      </tr>  	      	    
+	      <tr id="ActiveRow0">
+	        <td class="creatorCollumn" colspan="2"><canvas id="signature-pad2" width="404" height="154">Browser not compatible.</canvas><br>
+					<button class="generalbtn" id="clear2">Clear Signature</button></td>
+	      </tr>
+	      <tr id="ActiveRow1" colspan="2">
+	        <td class="creatorCollumn">Name:</td>
+	        <td class="creatorCollumnInput"><input type="string" id="creatorName" maxlength="35"></td>
+	      </tr>
+	      
+	      <tr id="ActiveRow2">
+	        <td class="creatorCollumn">Date:</td>
+			<td class="creatorCollumnInput"><input type="date" id="creatorDate" maxlength="30" placeholder="1st January 2022"></td>
+	      </tr>
+	      
+	    </tbody>
+	  </table>
+	</div>
+	
+<hr> <!-- LINE BREAK -->	
+	
+	<div class="tableSignatureDataEntry" style="min-width:410px;">
+	  <table class="table" id="SignatureDataEntry">
+	    <tbody>
+	      <tr> 
+		      <td colspan="2" id="policeSignatureBlockTitle"><b>POLICE SIGNATURE:</b></td>
+	      </tr>  
+	      <tr id="ActiveRow0">
+	        <td class="witnessCollumn" colspan="2"><canvas id="signature-pad1" width="404" height="154">Browser not compatible.</canvas><br>
+					<button class="generalbtn" id="clear1">Clear Signature</button>
+					<button class="colourPalleteBlack" onclick="PenBlack(), setWitnessRank(&#39;Constable&#39;)"></button>	
+					<button class="colourPalleteBlue" onclick="PenBlue(), setWitnessRank(&#39;Sergeant&#39;)"></button>
+					<button class="colourPalleteRed" onclick="PenRed(), setWitnessRank(&#39;Inspector&#39;)"></button>
+					<button class="colourPalleteGreen" onclick="PenGreen(), setWitnessRank(&#39;Superintendent&#39;)"></button></td>
+	      </tr>
+	      <tr id="ActiveRow1">
+	        <td class="witnessCollumn" id="witnessNameFixedText">Witness Name:</td>
+	        <td class="witnessCollumnInput"><input type="string" id="witnessName" maxlength="35" placeholder="John SMITH"></td>
+	      </tr>
+	      
+	      <tr id="ActiveRow2">
+	        <td class="witnessCollumn" id="witnessRankFixedText">Witness Rank:</td>
+	        <td class="witnessCollumnInput">
+		        <select id="witnessRank"><option></option><option>Constable</option><option>Senior Constable</option><option>Leading Senior Constable</option><option>Sergeant</option><option>Senior Sergeant</option><option>Inspector</option><option>Superintendent</option></select></td>
+	      </tr>
+	     
+	      
+	      <tr id="ActiveRow3">
+	        <td class="witnessCollumn" id="witnessDateFixedText">Date:</td>
+	        <td class="witnessCollumnInput"><input type="date" id="witnessDate" maxlength="30" placeholder="1st January 2022"></td>
+	
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+
+
+<p>	
+		</p><div class="tableFooterButtons" style="min-width:410px;">	
+			<button class="generalbtn" onclick="generatePDF()">Generate PDF</button>
+			<button class="generalbtn" onclick="clearFields()">Clear all Fields</button>
+		</div>
+<p></p>
+
+<!-- HIDDEN TABLE FOR GENERATION OF STATEMENT PARRAGRAPHS -->
+<p>
+</p><div class="tableStatementText">
+  <table class="table" id="StatementTextTable">
+    <tbody>
+      
+    </tbody>
+  </table>
+</div>
+<p>
+</div>
+
+<!-- SIGNATURE -->
+<!-- Source Code - Signature_Pad - https://github.com/szimek/signature_pad -->
+<!-- How To: https://dev.to/stackfindover/how-to-create-signature-pad-in-html-signature-pad-javascript-3866 -->
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script> -->
+<script src="./Statement_files/signature_pad.min.js.download"></script>
+<script>
+	//----CANVAS #1----
+       var canvas1 = document.getElementById("signature-pad1");
+
+       function resizeCanvas1() {
+           var ratio = Math.max(window.devicePixelRatio || 1, 1);
+           canvas1.width = canvas1.offsetWidth * ratio;
+           canvas1.height = canvas1.offsetHeight * ratio;
+           canvas1.getContext("2d").scale(ratio, ratio);
+       }
+       window.onresize1 = resizeCanvas1;
+       resizeCanvas1();
+
+       var signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
+
+       document.getElementById("clear1").addEventListener('click', function(){
+        signaturePad1.clear();
+       })
+
+	//----CANVAS #2----
+       var canvas2 = document.getElementById("signature-pad2");
+
+       function resizeCanvas2() {
+           var ratio = Math.max(window.devicePixelRatio || 1, 1);
+           canvas2.width = canvas2.offsetWidth * ratio;
+           canvas2.height = canvas2.offsetHeight * ratio;
+           canvas2.getContext("2d").scale(ratio, ratio);
+       }
+       window.onresize2 = resizeCanvas2;
+       resizeCanvas2();
+
+       var signaturePad2 = new SignaturePad(canvas2, {backgroundColor: 'rgb(255,255,255)'});
+       document.getElementById("clear2").addEventListener('click', function(){
+        signaturePad2.clear();
+       })
+       
+       
+       //Pen Colours
+       function PenBlack(){
+		const signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
+		officerRankPenColour = '#000000';
+		signaturePad1.penColor = officerRankPenColour;			
+		setOfficerWebTextColour(officerRankPenColour);
+		saveToLocalStorage("officerRankPenColour",officerRankPenColour)	
+		}
+		
+		function PenBlue(){
+		const signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
+		officerRankPenColour = '#00468b';
+		signaturePad1.penColor = officerRankPenColour;		
+		setOfficerWebTextColour(officerRankPenColour);		
+		saveToLocalStorage("officerRankPenColour",officerRankPenColour)		
+		}
+		
+		function PenRed(){
+		const signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
+		officerRankPenColour = '#da291c';	
+		signaturePad1.penColor = officerRankPenColour;
+		setOfficerWebTextColour(officerRankPenColour);		
+		saveToLocalStorage("officerRankPenColour",officerRankPenColour)	
+		}
+		
+		function PenGreen(){
+		const signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
+		officerRankPenColour = '#007a53';
+		signaturePad1.penColor = officerRankPenColour;
+		setOfficerWebTextColour(officerRankPenColour);		
+		saveToLocalStorage("officerRankPenColour",officerRankPenColour)		
+		}
+		
+		//Set the witnessRank drop down box to the received data, save it to localStorage
+		function setWitnessRank(rank){
+			document.getElementById("witnessRank").value = rank;
+			saveToLocalStorage("witnessRank",document.getElementById("witnessRank").value);
+		}
+       
+</script>
+<!-- PDF -->
+<!-- Source Code - jsPDF - https://artskydj.github.io/jsPDF/docs/index.html -->
+<script src="./Statement_files/jspdf.min.js.download"></script> <!-- Script for PDF Generation  -->
+<!-- Source Code - Tables - https://github.com/simonbengtsson/jsPDF-AutoTable -->
+<script src="./Statement_files/jspdf.plugin.autotable.min.js.download"></script> <!-- Script for PDF Table Generation  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+<script>
+	
+	//----SAVE INPUT DATA----
+	//On Event (Deselection of Text Input - Save INPUT value to Local Storage
+	inputs = document.getElementsByTagName("input");
+	for (let i=0; i<inputs.length;i++) {
+		inputs[i].addEventListener("blur", function (){
+		    saveToLocalStorage(inputs[i].id,inputs[i].value) });
+	}
+	//These ones are not input's so must do them seperately from the FOR loop
+	//Date	
+	document.getElementById("inputWitnessStatementDate").addEventListener("change", function () {
+		saveToLocalStorage("inputWitnessStatementDate",document.getElementById("inputWitnessStatementDate").value)
+	document.getElementById("witnessDate").value = document.getElementById("inputWitnessStatementDate").value;
+		saveToLocalStorage("witnessDate",document.getElementById("witnessDate").value)
+	document.getElementById("creatorDate").value = document.getElementById("inputWitnessStatementDate").value;
+		saveToLocalStorage("creatorDate",document.getElementById("creatorDate").value)
+	});
+	//Creator Name	
+	document.getElementById("inputCreatorName").addEventListener("blur", function () {
+		saveToLocalStorage("inputCreatorName",document.getElementById("inputCreatorName").value)
+	document.getElementById("creatorName").value = document.getElementById("inputCreatorName").value;
+		saveToLocalStorage("creatorName",document.getElementById("creatorName").value)
+	});
+	//Age
+	document.getElementById("inputAge").addEventListener("blur", function () {
+		statementAgeReplacement()    	
+		saveToLocalStorage("inputAge",document.getElementById("inputAge").value)
+	});
+	//Statement Text
+	document.getElementById("inputStatementText").addEventListener("blur", function (){
+	    saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value) });   	
+    	
+    //Witness Rank - Pen Determination
+	document.getElementById("witnessRank").addEventListener("change", function (){
+		saveToLocalStorage("witnessRank",document.getElementById("witnessRank").value);  	
+		switch(document.getElementById("witnessRank").value) {
+		  case "Constable":
+		  case "Senior Constable":
+		  case "Leading Senior Constable":
+		  	PenBlack()
+		    break;		
+		  case "Sergeant":
+		  case "Senior Sergeant":		  
+		    PenBlue()
+		    break;	
+		  case "Inspector":
+		    PenRed()
+		    break;	
+		  case "Superintendent":
+		    PenGreen()
+		    break;			    		    		    
+		  default:
+		    PenBlack()
+		}
+	});	
+
+    	
+    function viewDidLoad(){ //RUN CODE UPON LOADING OF WEBSITE
+	   
+		//----POPULATE OFFICER TEXT COLOUR----
+		//This will load the previously set text colour for the signature & officer details within the statement
+		officerRankPenColour = '#000000'
+		if (localStorage.getItem("officerRankPenColour") != null){
+			officerRankPenColour = localStorage.getItem("officerRankPenColour")
+			signaturePad1.penColor = officerRankPenColour
+			setOfficerWebTextColour(officerRankPenColour) //Set all the field colours to the appropriate colour for officer rank.
+		}	
+			    
+	    //----POPULATE INPUT WITH LOCALSTORAGE DATA----
+	    for (let [key, value] of Object.entries(localStorage)) {
+		    if(document.getElementById(key)){ //Key (ElementID) exists on page
+				document.getElementById(key).value = value; //Populate the Key (ElementById) with the value (TextBox Value)
+			}
+		}
+		
+    }	
+    
+    function saveToLocalStorage(dataKey,dataValue){
+	    localStorage.setItem(dataKey, dataValue);
+    }
+    
+    function clearLocalStorage(){
+    	for (let [key, value] of Object.entries(localStorage)) {
+	    	if(document.getElementById(key)){ //Key (ElementID) exists on page
+				localStorage.removeItem(key); //Remove value from localStorage	
+			}
+		}
+	}  
+    
+/*
+    function printLocalStorage(){
+	    for (let [key, value] of Object.entries(localStorage)) {
+			console.log(`${key}: ${value}`);
+		}
+    }
+*/
+    	
+    //----SET OFFICER DETAILS TEXT COLOUR----
+	    function setOfficerWebTextColour(hexString){
+    		document.getElementById("policeSignatureBlockTitle").style.color = hexString;
+		    
+    		document.getElementById("witnessNameFixedText").style.color = hexString;
+    		document.getElementById("witnessName").style.color = hexString;
+
+    		document.getElementById("witnessRankFixedText").style.color = hexString;
+    		document.getElementById("witnessRank").style.color = hexString;
+
+    		document.getElementById("witnessDateFixedText").style.color = hexString; 
+    		document.getElementById("witnessDate").style.color = hexString;    		    		
+    	}
+    	
+	//----INSERTABLE TEXT----	
+	function insertJurat(){
+		replaceSelectedText("This statement made by me accurately sets out the evidence that I would be prepared, if necessary, to give in court as a witness. The statement is true to the best of my knowledge and belief and I make it knowing that, if it is tendered in evidence, I will be liable to prosecution if I have wilfully stated in it anything that I know to be false, or do not believe to be true."+ "\r\r\n"+ "I am __ years of age."+ "\r\r\n")
+		statementAgeReplacement()
+	}	
+	
+	function insertCCTVStatement(){
+		document.getElementById("inputStatementText").value += "I am currently employed as a __ at __ ."+ "\r\r\n"+ 
+		"In relation to certain information received from police, I created a copy of all available CCTV footage related to an incident that had taken place between __ AM/PM on the __ . The incident occurred at __. "+ "\r\r\n"+
+		"At __ AM/PM on the __ I handed a __ with the copied CCTV footage and the words \"__\" written on the __ to __ ."+ "\r\r\n"
+		saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value)
+	}	
+	
+	function iSaid(){
+		document.getElementById("inputStatementText").value += "I said: \""
+		saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value)
+	}
+	function heSaid(){
+		document.getElementById("inputStatementText").value += "He said: \""
+		saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value)
+	}
+	function sheSaid(){
+		document.getElementById("inputStatementText").value += "She said: \""
+		saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value)
+	}
+	function said(){
+		document.getElementById("inputStatementText").value += " said: \""
+		saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value)
+	}
+	
+	function replaceSelectedText(string){
+			var txtArea = document.getElementById("inputStatementText");
+			var text = string
+			if (txtArea.selectionStart != undefined) {
+				    var startPos = txtArea.selectionStart;
+				    var endPos = txtArea.selectionEnd;
+				    selectedText = txtArea.value.substring(startPos, endPos);
+				if (selectedText.length >0) {
+					if(confirm("Are you sure you would like to replace the current selected text with the Jurat?")){
+				    	txtArea.value = txtArea.value.slice(0, startPos) + text + txtArea.value.slice(endPos);
+
+			    	} else {
+				     // Do nothing!
+			    	}
+			    } 
+				if (selectedText.length <=0){
+		  			document.getElementById("inputStatementText").value += text //Add the string to the end of current text.
+		  			saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value)
+		  		} 
+			}
+	}
+	
+	
+
+
+	function statementAgeReplacement(){		
+		//----Replace Statement age with input value----
+    	// If string has not replaced __ with a number (age) yet:
+    	if (document.getElementById("inputAge").value != ""){
+	    	let text = document.getElementById("inputStatementText").value;
+	    	let result = text.replace("I am __ years of age.", "I am " + document.getElementById("inputAge").value +" years of age.");
+	    	document.getElementById("inputStatementText").value = result;
+    	}
+    	// If __ has already been replaced with a number (age)
+    	if (document.getElementById("inputAge").value != ""){
+	    	let text = document.getElementById("inputStatementText").value;
+	    	let result = text.replace(/I am [0-9]{1,3} years of age./i, "I am " + document.getElementById("inputAge").value +" years of age.");
+	    	document.getElementById("inputStatementText").value = result;
+    	}
+    	
+    	// If user removes age, replace string in statement
+    	if (document.getElementById("inputAge").value == "" || document.getElementById("inputAge").value == null){
+	    	let text = document.getElementById("inputStatementText").value;
+	    	let result = text.replace(/I am [0-9]{1,100} years of age./i, "I am __ years of age.");
+	    	document.getElementById("inputStatementText").value = result;
+    	}
+    	saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value)
+	}
+
+
+//----STATEMENT TEXT BOX TO TABLE----
+	var tableRowCount = 0
+	var statementParragraphNo = 1
+	function GenerateTableText(){
+		
+		//SPLIT TEXT INTO AN ARRAY
+			let StatementText = document.getElementById("inputStatementText").value;
+			const StatementTextArray = StatementText.split("\n\n");
+			
+			for (let i = 0; i <= StatementTextArray.length; i++) {
+				if (StatementTextArray[i] != null && StatementTextArray[i] != ""){
+					  var table = document.getElementById("StatementTextTable");
+					  var tableRowCounts = document.getElementById('StatementTextTable').rows.length; //Create Variable obtaining count of rows	
+					  var row = table.insertRow(tableRowCounts); //Insert Row at this location.
+					  row.id = "ActiveRow"+tableRowCount; //Add ID to the Row of the table.
+					  tableRowCount += 1; //Increase tableRowCount for unique generation of row ID's.
+					  var cell1 = row.insertCell(0);
+					  var cell2 = row.insertCell(1);
+					  
+					  //Assign each new cell the appropriate Column id 
+					  cell1.className="statementParragraphNo"
+					  cell2.className="statementParragraph"
+					
+					 //Add data to the row
+					 
+					 let lowercaseArrayString = StatementTextArray[i].toLowerCase(); //Create temp variable of the string in lowercase format
+					 
+					 if (lowercaseArrayString.includes(" said:")){ //If parragraph starts with particular phrase, skip parragraph number.
+						 //OPTION 1 - Places all text in first cell and merges both cells together.
+						  cell1.innerHTML = StatementTextArray[i];
+						  cell1.colSpan = 2;
+					  		
+					  	//OPTION 2 - Spits the string at : where it puts both parts in each cell of the row.		 
+/*
+						  var charIndex = lowercaseArrayString.indexOf(":"); //Find the index of the character
+						  cell1.innerHTML = StatementTextArray[i].slice(0, charIndex+2);
+						  cell2.innerHTML = StatementTextArray[i].slice(charIndex+2);
+*/
+						  
+					 } else { //If parragraph does not start with a particular phrase, add a row number.
+					  						 
+						  cell1.innerHTML = statementParragraphNo + ".";
+						  cell2.innerHTML = StatementTextArray[i];
+						  statementParragraphNo +=1;
+					  }
+			  	}
+			}
+	 }
+
+
+
+	function generatePDF(){
+		clearStatementTextTable()
+		GenerateTableText()	//Runs the function that generates table rows from the text input	
+		
+
+
+	//----DATE----
+		//Generate a empty list of date variables
+		witnessStatementDateList = ["","","",""] 
+		creatorDateList = ["","","",""] 
+		witnessDateList = ["","","",""] 
+		
+		//Check if input fields contain data
+		if (document.getElementById("inputWitnessStatementDate").value != ""){
+			witnessStatementDateList = dateString(inputWitnessStatementDate) //Run date function to convert the date picker to a full date string.
+		}	
+		if (document.getElementById("creatorDate").value != ""){
+			creatorDateList = dateString(creatorDate) //Run date function to convert the date picker to a full date string.
+		}		
+		if (document.getElementById("witnessDate").value != ""){
+			witnessDateList = dateString(witnessDate) //Run date function to convert the date picker to a full date string.
+		}			
+		
+//Generate PDF
+//A4 = inch W:8.25 / H 11.75
+		event.preventDefault()
+		var doc = new jsPDF({orientation: 'portrait',unit: 'in', format: 'a4'}); //Generate a New PDF Document (ppi = 72)
+		
+	// ADD POLICE STATEMENT HEADER		 
+		var img = new Image();
+		img.src = 'Statement_files/images/Witness_Statement_Header_Page1.png';
+		doc.addImage(img, 'png', 0.88, 0.35, 6.5, 1.3); //__, Image File Type, X,Y, Width, Height
+
+	// BLACK LINE ABOVE STATEMENT DETAILS	
+		doc.setDrawColor('black');
+		doc.setLineWidth(3/72);		
+		doc.line(0.653,1.67,7.537,1.67); //Line below top image
+		
+// 		doc.line(doc.internal.pageSize.getWidth()/2,0,doc.internal.pageSize.getWidth()/2,doc.internal.pageSize.getHeight()); //Line through the centre
+
+	// STATEMENT DETAILS - Headings:	
+		let DetailsTextHeadingsMatterOf = "In the matter of:";
+		doc.setFontSize(11);
+		doc.setFontType("bold");
+		doc.text(DetailsTextHeadingsMatterOf, 0.80, 2.20);
+		
+		let DetailsTextHeadingsPlace = "Place:";
+		doc.setFontSize(11);
+		doc.setFontType("bold");
+		doc.text(DetailsTextHeadingsPlace, 0.80, 2.45);
+		
+		let DetailsTextHeadingsDate = "Date:";
+		doc.setFontSize(11);
+		doc.setFontType("bold");
+		doc.text(DetailsTextHeadingsDate, 0.80, 2.70);
+		
+	// STATEMENT DETAILS - Headings Data Entered:
+		let DetailsTextDataMatterOf = document.getElementById("inputMatterOf").value;
+		doc.setFontSize(11);
+		doc.setFontType("normal");
+		doc.text(DetailsTextDataMatterOf, 2.18, 2.20);
+		
+		let DetailsTextDataPlace = document.getElementById("inputPlace").value;
+		doc.setFontSize(11);
+		doc.setFontType("normal");
+		doc.text(DetailsTextDataPlace, 2.18, 2.45);
+		
+		let DetailsTextDataDate = witnessStatementDateList[1]+" "+witnessStatementDateList[2]+" "+witnessStatementDateList[3];
+		doc.setFontSize(11);
+		doc.setFontType("normal");
+		doc.text(DetailsTextDataDate, 2.18, 2.70);
+		
+	// STATEMENT DETAILS - Name Heading:
+		let DetailsTextNameHeading = "Name:";
+		doc.setFontSize(11);
+		doc.setFontType("bold");
+		doc.text(DetailsTextNameHeading, 0.80, 3.24);
+		
+	// STATEMENT DETAILS - Name Data Entered:
+		let DetailsTextNameHeadingData = document.getElementById("inputCreatorName").value;
+		doc.setFontSize(11);
+		doc.setFontType("normal");
+		doc.text(DetailsTextNameHeadingData, 2.18, 3.24);
+		
+	// STATES:
+		doc.setFontSize(11);
+		doc.setFontType("bold");
+		doc.text("STATES:", 0.75, 3.79);
+
+	// DRAW LINE - HEADINGS & NAME
+		doc.setDrawColor('black');
+		doc.setLineWidth(1/72);
+		
+		//xTOP, yTOP, xBOTTOM, yBOTTOM 
+		doc.line(0.653,2,7.537,2); //Top Details Horizontal Line
+		doc.line(0.66,2,0.66,2.8); //Left Details Vertical Line
+		doc.line(7.53,2,7.53,2.8); //Right Details Vertical Line
+		doc.line(0.653,2.8,7.537,2.8); //Bottom Details Horizontal Line
+			
+		doc.line(0.653,3.055,7.537,3.055); //Top Name Horizontal Line	
+		doc.line(0.66,3.055,0.66,3.31); //Left Name Vertical Line	
+		doc.line(7.53,3.055,7.53,3.31); //Right Details Vertical Line	
+		doc.line(0.653,3.31,7.537,3.31); //Bottom Name Horizontal Line	
+		
+		
+	// GENERATE TABLE CONTAINING PARRAGRAPH TEXT TABLE	
+		doc.autoTable({html:'#StatementTextTable',
+			startY:3.89, //First Page - height to start from the top
+			theme: 'plain',
+// 			theme: 'grid',			
+			styles:{halign:'justify', fontSize: 11, cellWidth: 5.5},
+			margin:{top: 1, right: 0.75, bottom: 2.4, left: 0.69},
+// 			columnStyles: {0: {cellWidth: .40, fontStyle: 'bold'}, 1: {cellWidth: 1} } 
+			columnStyles: {0: {cellWidth: .40}} 			
+
+			}) //Generate Table from HTML table code within website and style the table with centring the heading and column widths set.
+		
+	// HEADER - Statement of & Matter of Details - Page2 onwards
+		for (let i = 2; i<=doc.getNumberOfPages(); i++){
+			doc.setPage(i)	
+			let pageWidth = doc.internal.pageSize.getWidth(); //Gets width of PDF page within document and sets as variable.
+			let pageHeight = doc.internal.pageSize.getHeight() //Gets height of PDF page within document and sets as variable.	
+			doc.setFontSize(11); //Set Font Size Footer
+			doc.setFontType("bold");
+			
+			doc.text("Statement of", pageWidth / 2 - 0.05, .5, 'right')
+			doc.text("In the matter of", pageWidth / 2 - 0.075, .7, 'right')
+			
+			doc.setFontType("normal");
+			
+			doc.text(document.getElementById("inputCreatorName").value, pageWidth / 2 + 0.05, .5, 'left')
+			var splitMessage = doc.splitTextToSize(document.getElementById("inputMatterOf").value, 2.75); //Split the text by the amount for word wrapping
+			doc.text(splitMessage, pageWidth / 2 + 0.05, .7, 'left')
+			 
+		}
+	
+			
+
+ 	// FOOTER - Witness / Creator Details
+		for (let i = 1; i <= doc.getNumberOfPages(); i++) {
+			doc.setPage(i)
+			let pageWidth = doc.internal.pageSize.getWidth(); //Gets width of PDF page within document and sets as variable.
+			let pageHeight = doc.internal.pageSize.getHeight(); //Gets height of PDF page within document and sets as variable.
+			
+			
+			//Add the signature canvas' to the PDF
+			let witnessSignatureStart = pageWidth / 5
+			let creatorSignatureStart = pageWidth / 5 * 3.1
+			let signatureHeight = pageHeight - 2.5
+			
+			var canvas1 = document.getElementById("signature-pad1");
+			doc.addImage(canvas1.toDataURL("image/jpeg"), 'JPEG', witnessSignatureStart, signatureHeight, 2.08, 0.78);
+		
+			var canvas2 = document.getElementById("signature-pad2");
+			doc.addImage(canvas2.toDataURL("image/jpeg"), 'JPEG', creatorSignatureStart, signatureHeight, 2.08, 0.78);
+
+			
+			//Add signature details for witness & creator
+			doc.setFontSize(11); //Set Font Size Footer
+			doc.setFontType("normal");
+			
+			doc.text("Witness:", pageWidth / 5 - 0.15, pageHeight - 1.7, 'right')
+			doc.setTextColor(officerRankPenColour)
+			doc.text(document.getElementById("witnessName").value, pageWidth / 5, pageHeight - 1.5, 'left')
+			doc.text(document.getElementById("witnessRank").value, pageWidth / 5, pageHeight - 1.3, 'left')
+			doc.text(witnessDateList[1]+" "+witnessDateList[2]+" "+witnessDateList[3], pageWidth / 5, pageHeight - 1.1, 'left')
+			
+			doc.setTextColor(0,0,0)	
+			doc.text("Signature:", pageWidth / 5 * 3.1 - 0.15, pageHeight - 1.7, 'right')
+			doc.text(document.getElementById("creatorName").value, pageWidth / 5 * 3.1, pageHeight - 1.5, 'left')
+			doc.text(creatorDateList[1]+" "+creatorDateList[2]+" "+creatorDateList[3], pageWidth / 5 * 3.1, pageHeight - 1.3, 'left')
+			
+			doc.setDrawColor('black');
+			doc.setLineWidth(1/72);
+			
+			let witnessLineStart = pageWidth / 5 - 0.10
+			let witnessLineEnd = pageWidth / 2 - 0.25
+			let signatureLineStart = pageWidth / 5 * 3.1 - 0.10
+			let lineHeight = pageHeight - 1.68
+			//xTOP, yTOP, xBOTTOM, yBOTTOM 
+			doc.line(witnessLineStart,lineHeight,witnessLineEnd,lineHeight); //Witness Horizontal Line
+			doc.line(signatureLineStart,lineHeight,signatureLineStart + (witnessLineEnd - witnessLineStart),lineHeight); //Signature Horizontal Line
+		}
+
+	//FOOTER - Page Number
+		for (let i = 1; i <= doc.getNumberOfPages(); i++) {
+			doc.setPage(i)
+			let pageWidth = doc.internal.pageSize.getWidth(); //Gets width of PDF page within document and sets as variable.
+			let pageHeight = doc.internal.pageSize.getHeight() //Gets height of PDF page within document and sets as variable.
+			doc.setFontSize(8); //Set Font Size Footer
+			doc.setFontType("normal");
+			doc.text('Page '+ i + ' of ' + doc.getNumberOfPages(), pageWidth - 1, pageHeight - 0.7, 'right')
+		}
+		
+
+		
+	//SAVE THE DOCUMENT
+		doc.save('Witness Statement - ' + document.getElementById("inputCreatorName").value + '.pdf'); //Save PDF with filename
+}
+</script>
+<script>
+function clearFields(){
+	
+	if (confirm('Are you sure you want to clear all information?')) {
+		//Loop through all INPUTS and set values to "" (nil)		
+		inputs = document.getElementsByTagName("input");
+		for (let i=0; i<inputs.length;i++) {
+			inputs[i].value = "";
+		}	
+			
+		document.getElementById("inputStatementText").value = "";
+		document.getElementById("witnessRank").value = "";
+			
+		clearStatementTextTable();
+		clearLocalStorage()
+		PenBlack();
+		insertJurat();
+		signaturePad1.clear();
+		signaturePad2.clear();
+	} else {
+	  // Do nothing!
+	}
+}
+
+	function clearStatementTextTable(){
+		tableRowCount = 0; //Reset the table row count.
+		statementParragraphNo = 1; //Reset the parragraph numbers start count.
+		//Loop through the table of parragraphs and delete all rows
+		var myTable = document.getElementById("StatementTextTable");
+		var rowCount = myTable.rows.length;
+		for (var i=rowCount-1; i>=0; i--) {
+			myTable.deleteRow(i);
+		}
+	}
+
+</script>
+<script src="./Statement_files/date.js.download">
+<!--- SCRIPT FOR DATE FORMATTING --->
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./Statement_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YFWWC16XJR');
+</script>
+<script>
+  const correctHash = "01c2558712912b1b87905ab91d5ce85e"; // Change this to your desired hash
+
+  function checkPassword() {
+    const userInput = document.getElementById("passwordInput").value;
+    const userHash = md5(userInput); // uses the md5() function from the library
+
+    const errorDiv = document.getElementById("error");
+    if (userHash === correctHash) {
+      document.getElementById("protectedContent").style.display = "block";
+      errorDiv.textContent = "";
+    } else {
+      errorDiv.textContent = "Incorrect password. Try again.";
+    }
+  }
+  
+  document.getElementById("passwordInput").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      checkPassword();
+    }
+  });
+  
+</script>
+</p>
+</body>
+</html>

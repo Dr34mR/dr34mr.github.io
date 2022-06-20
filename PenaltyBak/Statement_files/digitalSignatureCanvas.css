@@ -1,0 +1,74 @@
+.colourPalleteBlack {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 12px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  vertical-align:middle;
+}
+.colourPalleteBlue {
+  background-color: #00468B;
+  border: none;
+  color: white;
+  padding: 12px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  vertical-align:middle;
+}
+.colourPalleteRed {
+  background-color: #DA291C;
+  border: none;
+  color: white;
+  padding: 12px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  vertical-align:middle;
+}
+.colourPalleteGreen {
+  background-color: #007A53;
+  border: none;
+  color: white;
+  padding: 12px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  vertical-align:middle;
+}
+
+ #signature-pad1 {
+  width: 400px;
+  height: 150px;
+  margin: 0 auto;
+  cursor: crosshair;
+  border: 2px dotted #CCCCCC;
+  border-radius: 15px;
+}
+
+ #signature-pad2 {
+  width: 400px;
+  height: 150px;
+  margin: 0 auto;
+  cursor: crosshair;
+  border: 2px dotted #CCCCCC;
+  border-radius: 15px;
+}
+/*
+     FILE ARCHIVED ON 07:17:44 Sep 17, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 05:16:10 Jun 09, 2025.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 0.852
+  exclusion.robots: 0.016
+  exclusion.robots.policy: 0.007
+  esindex: 0.009
+  cdx.remote: 113.913
+  LoadShardBlock: 79.337 (3)
+  PetaboxLoader3.datanode: 111.421 (4)
+  load_resource: 91.618
+  PetaboxLoader3.resolve: 47.736
+*/
