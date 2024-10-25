@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Thin-Integration
+categories: ThinIntegration
 title: 23.4 Thin Office Integration BUT Cross Domain!
 ---
 
