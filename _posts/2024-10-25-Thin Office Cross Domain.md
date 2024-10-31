@@ -1,7 +1,7 @@
 ---
 layout: post
-categories: ThinIntegration
-title: 23.4 Thin Office Integration BUT Cross Domain!
+categories: thinintegration
+title: Thin Office Integration BUT Cross Domain for CM23.4!
 ---
 
 So ... you want to enable the Content Manager ThinOffice Integration but you are trying to have it used Cross-Domain?
