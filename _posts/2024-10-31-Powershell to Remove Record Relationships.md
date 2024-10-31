@@ -31,9 +31,10 @@ Sample Log File that gets created:
 ![Image]({{ site.url }}assets/2024-10-31-Image4.png)
 
 Download copy of Sample Script: [Download]({{ site.url }}assets/2024-10-31-RemoveRelationships.ps1)
+
 Download copy of Sample CSV:    [Download]({{ site.url }}assets/2024-10-31-RemoveRelationships.csv)
 
-~~~C#
+~~~ C#
 # Content manager DLL Location
 
 $sdkAssemblyPath = "C:\Program Files\Micro Focus\Content Manager\TRIM.SDK.dll"
