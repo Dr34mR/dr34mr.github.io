@@ -1,9 +1,4 @@
 pre.highlight {
-    overflow: auto;
-    font: small;
-} 
-
-.highlight {
   background-color: #efefef;
   padding: 7px 7px 7px 10px;
   border: 1px solid #ddd;
@@ -11,6 +6,7 @@ pre.highlight {
   -webkit-box-shadow: 3px 3px rgba(0,0,0,0.1);
   box-shadow: 3px 3px rgba(0,0,0,0.1);
   margin: 20px 0 20px 0;
+  overflow: auto;
 }
 
 code {
