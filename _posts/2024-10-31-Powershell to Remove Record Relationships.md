@@ -15,19 +15,23 @@ Below you will find my some sample POWERSHELL to remove record relationships fro
 Most of this is the boilerplate of loading the SDK, connecting to a DB, loading the CSV file, and then doing something.
 
 Sample CSV layout:
+
 ![Image]({{ site.url }}assets/2024-10-31-Image1.png)
 
 Sample Record Prior to Change:
+
 ![Image]({{ site.url }}assets/2024-10-31-Image2.png)
 
 Sample Output:
+
 ![Image]({{ site.url }}assets/2024-10-31-Image3.png)
 
 Sample Log File that gets created:
+
 ![Image]({{ site.url }}assets/2024-10-31-Image4.png)
 
-Download copy of Sample Script: ![Download]({{ site.url }}assets/2024-10-31-RemoveRelationships.ps1)
-Download copy of Sample CSV:    ![Download]({{ site.url }}assets/2024-10-31-RemoveRelationships.csv)
+Download copy of Sample Script: [Download]({{ site.url }}assets/2024-10-31-RemoveRelationships.ps1)
+Download copy of Sample CSV:    [Download]({{ site.url }}assets/2024-10-31-RemoveRelationships.csv)
 
 ~~~C#
 # Content manager DLL Location
