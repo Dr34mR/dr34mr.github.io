@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Non-TRIM
+categories: non-trim
 title: Up and running!
 ---
 
