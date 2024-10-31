@@ -36,5 +36,4 @@ Sample PS1 script can be found [here]({{ site.url }}assets/2024-10-31-RemoveRela
 
 Sample CSV that this script used can be found [here]({{ site.url }}assets/2024-10-31-RemoveRelationships.csv)
 
-> ⚠ Warning
-> As always, scripts should first be run in a non-production environment to verify they work as intended 😁
+> ⚠ Warning - As always, scripts should first be run in a non-production environment to verify they work as intended
