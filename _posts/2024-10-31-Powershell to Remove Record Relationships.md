@@ -34,7 +34,7 @@ Download copy of Sample Script: [Download]({{ site.url }}assets/2024-10-31-Remov
 
 Download copy of Sample CSV:    [Download]({{ site.url }}assets/2024-10-31-RemoveRelationships.csv)
 
-```PowerShell
+```
 # Content manager DLL Location
 
 $sdkAssemblyPath = "C:\Program Files\Micro Focus\Content Manager\TRIM.SDK.dll"
