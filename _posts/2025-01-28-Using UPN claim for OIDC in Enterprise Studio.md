@@ -1,0 +1,45 @@
+---
+layout: post
+categories: admin
+title: Using UPN Claim instead of Email for Azure OpenID
+---
+
+Got asked today about if it was possible to swap from using the email as their login to instead use the UPN in Azure.
+
+Reason for this is the email address often goes through changes when staff change names or different areas within the organisation (due to different sub-domains).
+
+Outside of changing the logins of the users in Content Manager to use the UPN address instead, the updates in Azure to the Application Registration and the changes in Enterprise Studio are straight forward.
+
+### Azure App Registration Changes
+
+Underneath the application registrations 'Token configuration' menu, add the following optional claim. Make sure the Token Type is ID (not Access or SAML).
+
+![Image]({{ site.url }}assets/2025-01-28-Image1.png)
+
+Within the API permissions, make sure the Delegated Profile permission has been added.
+
+![Image]({{ site.url }}assets/2024-10-31-Image2.png)
+
+### TRIM Enterprise Studio
+
+Within Enterprise Studio, jump into the OpenID Authentication tab (may be under right click -> properties, or may be under right click -> authentication)
+
+Update the Identity scopes to include profile
+
+![Image]({{ site.url }}assets/2024-10-31-Image3.png)
+
+Update the Identity claim to be UPN
+
+![Image]({{ site.url }}assets/2024-10-31-Image4.png)
+
+Hit the Test Authentication button
+
+![Image]({{ site.url }}assets/2024-10-31-Image5.png)
+
+If the new claim comes back OK you will see a success message returned with the new claim for this test user
+
+![Image]({{ site.url }}assets/2024-10-31-Image5.png)
+
+When ready, Save + Deploy
+
+> ⚠ Warning - As always, changes should be first tested in a non-production environment to verify it works as expected
