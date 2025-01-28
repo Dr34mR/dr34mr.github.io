@@ -22,24 +22,24 @@ Within the API permissions, make sure the Delegated Profile permission has been 
 
 ### TRIM Enterprise Studio
 
-Within Enterprise Studio, jump into the OpenID Authentication tab (may be under right click -> properties, or may be under right click -> authentication)
+Within Enterprise Studio, jump into the OpenID Authentication tab (may be under right click ➡ properties, or may be under right click ➡ authentication)
 
-Update the Identity scopes to include profile
+Update the Identity scopes to include 'profile' as per the screenshot
 
 ![Image]({{ site.url }}assets/2025-01-28-Image3.png)
 
-Update the Identity claim to be UPN
+Update the Identity claim from 'email' to 'upn' as per the screenshot
 
 ![Image]({{ site.url }}assets/2025-01-28-Image4.png)
 
-Hit the Test Authentication button
+Hit the Test Authentication button and try logging in. Note, for the login to the provider, you may still require to use the primary email for autentication, then the UPN will be what is returned from the provider to Content Manager.
 
 ![Image]({{ site.url }}assets/2025-01-28-Image5.png)
 
-If the new claim comes back OK you will see a success message returned with the new claim for this test user
+If the new claim comes back OK you will see a success message returned with the UPN claim value for this test user.
 
 ![Image]({{ site.url }}assets/2025-01-28-Image6.png)
 
-When ready, Save + Deploy
+When ready, Save + Deploy to commit the changes to the workgroup pool.
 
 > ⚠ Warning - As always, changes should be first tested in a non-production environment to verify it works as expected
