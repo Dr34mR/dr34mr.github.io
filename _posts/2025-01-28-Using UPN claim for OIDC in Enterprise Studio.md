@@ -18,7 +18,7 @@ Underneath the application registrations 'Token configuration' menu, add the fol
 
 Within the API permissions, make sure the Delegated Profile permission has been added.
 
-![Image]({{ site.url }}assets/2024-10-31-Image2.png)
+![Image]({{ site.url }}assets/2025-01-28-Image2.png)
 
 ### TRIM Enterprise Studio
 
@@ -26,19 +26,19 @@ Within Enterprise Studio, jump into the OpenID Authentication tab (may be under 
 
 Update the Identity scopes to include profile
 
-![Image]({{ site.url }}assets/2024-10-31-Image3.png)
+![Image]({{ site.url }}assets/2025-01-28-Image3.png)
 
 Update the Identity claim to be UPN
 
-![Image]({{ site.url }}assets/2024-10-31-Image4.png)
+![Image]({{ site.url }}assets/2025-01-28-Image4.png)
 
 Hit the Test Authentication button
 
-![Image]({{ site.url }}assets/2024-10-31-Image5.png)
+![Image]({{ site.url }}assets/2025-01-28-Image5.png)
 
 If the new claim comes back OK you will see a success message returned with the new claim for this test user
 
-![Image]({{ site.url }}assets/2024-10-31-Image5.png)
+![Image]({{ site.url }}assets/2025-01-28-Image6.png)
 
 When ready, Save + Deploy
 
