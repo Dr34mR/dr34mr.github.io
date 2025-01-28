@@ -6,9 +6,9 @@ title: Using UPN Claim instead of Email for Azure OpenID
 
 Got asked today about if it was possible to swap from using the email as their login to instead use the UPN in Azure.
 
-Reason for this is the email address often goes through changes when staff change names or different areas within the organisation (due to different sub-domains).
+Reason for this is the email address often goes through changes when staff change names or staff move to different areas within the organisation (due to different domains).
 
-Outside of changing the logins of the users in Content Manager to use the UPN address instead, the updates in Azure to the Application Registration and the changes in Enterprise Studio are straight forward.
+Outside of changing the logins of the users in Content Manager to use the UPN address instead, the updates in Azure to the Application Registration and the changes in Enterprise Studio to ensure the UPN comes back are straight forward.
 
 ### Azure App Registration Changes
 
