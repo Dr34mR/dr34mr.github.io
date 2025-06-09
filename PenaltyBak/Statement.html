@@ -35,15 +35,18 @@ p {font-family: arial;}
 		border-radius: 5px;
 		padding: 5px 5px;		
 }
+
 #protectedContent {
       display: none;
       margin-top: 20px;
       border: 1px solid #ccc;
       padding: 10px;
-    }
+}
+
 #error {
   color: red;
 }
+
 </style>	
 	
 <!--
@@ -235,80 +238,82 @@ I have not used Generative Artificial Intelligence (Gen AI) in the creation of t
 <!-- <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script> -->
 <script src="./Statement_files/signature_pad.min.js.download"></script>
 <script>
+	
 	//----CANVAS #1----
-       var canvas1 = document.getElementById("signature-pad1");
+	var canvas1 = document.getElementById("signature-pad1");
 
-       function resizeCanvas1() {
-           var ratio = Math.max(window.devicePixelRatio || 1, 1);
-           canvas1.width = canvas1.offsetWidth * ratio;
-           canvas1.height = canvas1.offsetHeight * ratio;
-           canvas1.getContext("2d").scale(ratio, ratio);
-       }
-       window.onresize1 = resizeCanvas1;
-       resizeCanvas1();
+	function resizeCanvas1() {
+		var ratio = Math.max(window.devicePixelRatio || 1, 1);
+		canvas1.width = canvas1.offsetWidth * ratio;
+		canvas1.height = canvas1.offsetHeight * ratio;
+		canvas1.getContext("2d").scale(ratio, ratio);
+	}
+	   
+	window.onresize1 = resizeCanvas1;
+	resizeCanvas1();
 
-       var signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
+	var signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
 
-       document.getElementById("clear1").addEventListener('click', function(){
-        signaturePad1.clear();
-       })
+	document.getElementById("clear1").addEventListener('click', function(){
+		signaturePad1.clear();
+	})
 
 	//----CANVAS #2----
-       var canvas2 = document.getElementById("signature-pad2");
+	var canvas2 = document.getElementById("signature-pad2");
 
-       function resizeCanvas2() {
-           var ratio = Math.max(window.devicePixelRatio || 1, 1);
-           canvas2.width = canvas2.offsetWidth * ratio;
-           canvas2.height = canvas2.offsetHeight * ratio;
-           canvas2.getContext("2d").scale(ratio, ratio);
-       }
-       window.onresize2 = resizeCanvas2;
-       resizeCanvas2();
+	function resizeCanvas2() {
+	   var ratio = Math.max(window.devicePixelRatio || 1, 1);
+	   canvas2.width = canvas2.offsetWidth * ratio;
+	   canvas2.height = canvas2.offsetHeight * ratio;
+	   canvas2.getContext("2d").scale(ratio, ratio);
+	}
+	window.onresize2 = resizeCanvas2;
+	resizeCanvas2();
 
-       var signaturePad2 = new SignaturePad(canvas2, {backgroundColor: 'rgb(255,255,255)'});
-       document.getElementById("clear2").addEventListener('click', function(){
-        signaturePad2.clear();
-       })
-       
-       
-       //Pen Colours
-       function PenBlack(){
+	var signaturePad2 = new SignaturePad(canvas2, {backgroundColor: 'rgb(255,255,255)'});
+	document.getElementById("clear2").addEventListener('click', function(){
+		signaturePad2.clear();
+	})
+   
+   
+	//Pen Colours
+	function PenBlack(){
 		const signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
 		officerRankPenColour = '#000000';
 		signaturePad1.penColor = officerRankPenColour;			
 		setOfficerWebTextColour(officerRankPenColour);
 		saveToLocalStorage("officerRankPenColour",officerRankPenColour)	
-		}
-		
-		function PenBlue(){
+	}
+	
+	function PenBlue(){
 		const signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
 		officerRankPenColour = '#00468b';
 		signaturePad1.penColor = officerRankPenColour;		
 		setOfficerWebTextColour(officerRankPenColour);		
 		saveToLocalStorage("officerRankPenColour",officerRankPenColour)		
-		}
-		
-		function PenRed(){
+	}
+	
+	function PenRed(){
 		const signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
 		officerRankPenColour = '#da291c';	
 		signaturePad1.penColor = officerRankPenColour;
 		setOfficerWebTextColour(officerRankPenColour);		
 		saveToLocalStorage("officerRankPenColour",officerRankPenColour)	
-		}
-		
-		function PenGreen(){
+	}
+	
+	function PenGreen(){
 		const signaturePad1 = new SignaturePad(canvas1, {backgroundColor: 'rgb(255,255,255)'});
 		officerRankPenColour = '#007a53';
 		signaturePad1.penColor = officerRankPenColour;
 		setOfficerWebTextColour(officerRankPenColour);		
 		saveToLocalStorage("officerRankPenColour",officerRankPenColour)		
-		}
-		
-		//Set the witnessRank drop down box to the received data, save it to localStorage
-		function setWitnessRank(rank){
-			document.getElementById("witnessRank").value = rank;
-			saveToLocalStorage("witnessRank",document.getElementById("witnessRank").value);
-		}
+	}
+	
+	//Set the witnessRank drop down box to the received data, save it to localStorage
+	function setWitnessRank(rank){
+		document.getElementById("witnessRank").value = rank;
+		saveToLocalStorage("witnessRank",document.getElementById("witnessRank").value);
+	}
        
 </script>
 <!-- PDF -->
@@ -416,22 +421,22 @@ I have not used Generative Artificial Intelligence (Gen AI) in the creation of t
 */
     	
     //----SET OFFICER DETAILS TEXT COLOUR----
-	    function setOfficerWebTextColour(hexString){
-    		document.getElementById("policeSignatureBlockTitle").style.color = hexString;
-		    
-    		document.getElementById("witnessNameFixedText").style.color = hexString;
-    		document.getElementById("witnessName").style.color = hexString;
+	function setOfficerWebTextColour(hexString){
+		document.getElementById("policeSignatureBlockTitle").style.color = hexString;
+		
+		document.getElementById("witnessNameFixedText").style.color = hexString;
+		document.getElementById("witnessName").style.color = hexString;
 
-    		document.getElementById("witnessRankFixedText").style.color = hexString;
-    		document.getElementById("witnessRank").style.color = hexString;
+		document.getElementById("witnessRankFixedText").style.color = hexString;
+		document.getElementById("witnessRank").style.color = hexString;
 
-    		document.getElementById("witnessDateFixedText").style.color = hexString; 
-    		document.getElementById("witnessDate").style.color = hexString;    		    		
-    	}
+		document.getElementById("witnessDateFixedText").style.color = hexString; 
+		document.getElementById("witnessDate").style.color = hexString;    		    		
+	}
     	
 	//----INSERTABLE TEXT----	
 	function insertJurat(){
-		replaceSelectedText("This statement made by me accurately sets out the evidence that I would be prepared, if necessary, to give in court as a witness. The statement is true to the best of my knowledge and belief and I make it knowing that, if it is tendered in evidence, I will be liable to prosecution if I have wilfully stated in it anything that I know to be false, or do not believe to be true."+ "\r\r\n"+ "I am __ years of age."+ "\r\r\n")
+		replaceSelectedText("This statement made by me accurately sets out the evidence that I would be prepared, if necessary, to give in court as a witness. The statement is true to the best of my knowledge and belief and I make it knowing that, if it is tendered in evidence, I will be liable to prosecution if I have wilfully stated in it anything that I know to be false, or do not believe to be true."+ "\r\r\n"+ "I am __ years of age."+ "\r\r\n"+"I have not used Generative Artificial Intelligence (Gen AI) in the creation of this statement or any attached exhibits."+"\r\r\n")
 		statementAgeReplacement()
 	}	
 	
@@ -458,7 +463,6 @@ I have not used Generative Artificial Intelligence (Gen AI) in the creation of t
 		document.getElementById("inputStatementText").value += " said: \""
 		saveToLocalStorage("inputStatementText",document.getElementById("inputStatementText").value)
 	}
-	
 	function replaceSelectedText(string){
 			var txtArea = document.getElementById("inputStatementText");
 			var text = string
@@ -480,10 +484,6 @@ I have not used Generative Artificial Intelligence (Gen AI) in the creation of t
 		  		} 
 			}
 	}
-	
-	
-
-
 	function statementAgeReplacement(){		
 		//----Replace Statement age with input value----
     	// If string has not replaced __ with a number (age) yet:
@@ -761,28 +761,29 @@ I have not used Generative Artificial Intelligence (Gen AI) in the creation of t
 }
 </script>
 <script>
-function clearFields(){
-	
-	if (confirm('Are you sure you want to clear all information?')) {
-		//Loop through all INPUTS and set values to "" (nil)		
-		inputs = document.getElementsByTagName("input");
-		for (let i=0; i<inputs.length;i++) {
-			inputs[i].value = "";
-		}	
+	function clearFields(){
+		
+		if (confirm('Are you sure you want to clear all information?')) {
+			//Loop through all INPUTS and set values to "" (nil)		
+			inputs = document.getElementsByTagName("input");
+			for (let i=0; i<inputs.length;i++) {
+				inputs[i].value = "";
+			}	
+				
+			document.getElementById("inputStatementText").value = "";
+			document.getElementById("witnessRank").value = "";
+				
+			clearStatementTextTable();
+			clearLocalStorage()
+			PenBlack();
+			insertJurat();
 			
-		document.getElementById("inputStatementText").value = "";
-		document.getElementById("witnessRank").value = "";
-			
-		clearStatementTextTable();
-		clearLocalStorage()
-		PenBlack();
-		insertJurat();
-		signaturePad1.clear();
-		signaturePad2.clear();
-	} else {
-	  // Do nothing!
+			signaturePad1.clear();
+			signaturePad2.clear();
+		} else {
+		  // Do nothing!
+		}
 	}
-}
 
 	function clearStatementTextTable(){
 		tableRowCount = 0; //Reset the table row count.
@@ -802,15 +803,31 @@ function clearFields(){
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="" src="./Statement_files/js"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-YFWWC16XJR');
-</script>
 <script>
-  const correctHash = "01c2558712912b1b87905ab91d5ce85e"; // Change this to your desired hash
+	const correctHash = "01c2558712912b1b87905ab91d5ce85e"; // Change this to your desired hash
+
+	function fixCanvasRender(canvasId) {
+	  const canvas = document.getElementById(canvasId);
+	  if (!canvas) {
+		console.warn(`Canvas with ID "${canvasId}" not found.`);
+		return;
+	  }
+
+	  const ctx = canvas.getContext("2d");
+	  if (!ctx) {
+		console.warn(`Canvas context could not be retrieved for "${canvasId}".`);
+		return;
+	  }
+
+	  // Force redraw or reinitialize
+	  canvas.width = canvas.clientWidth;
+	  canvas.height = canvas.clientHeight;
+
+	  // Re-setup drawing context + clear canvas
+	  ctx.fillStyle = "#ffffff"; // white
+	  ctx.fillRect(0, 0, canvas.width, canvas.height);
+	}
 
   function checkPassword() {
     const userInput = document.getElementById("passwordInput").value;
@@ -818,8 +835,13 @@ function clearFields(){
 
     const errorDiv = document.getElementById("error");
     if (userHash === correctHash) {
-      document.getElementById("protectedContent").style.display = "block";
-      errorDiv.textContent = "";
+	
+		document.getElementById("protectedContent").style.display = "block";
+		errorDiv.textContent = "";
+	  
+		fixCanvasRender("signature-pad1");
+		fixCanvasRender("signature-pad2");
+		
     } else {
       errorDiv.textContent = "Incorrect password. Try again.";
     }
